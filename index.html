@@ -15,13 +15,16 @@
     <body>
         <header class="header">
             <nav class="nav">
+                <button class="nav-burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
                 <ul class="nav-links">
-                    <li><a href="#accueil">Atelier</a></li>
+                    <li><a href="#accueil">L'atelier</a></li>
                     <li><a href="#oeuvres">Œuvres</a></li>
+                    <li><a href="#peintures">Peintures</a></li>
+                    <li><a href="#sculptures">Sculptures</a></li>
                     <li><a href="#artiste">L'artiste</a></li>
-                    <li><a href="#portraits">Portrait personnalisé</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+                <div class="nav-overlay"></div>
             </nav>
         </header>
 
@@ -50,18 +53,31 @@
             <h2 class="section-title">Œuvres en partage</h2>
             <p class="bloc-intro-text">
                 Chaque œuvre est une présence.<br />
-Un fragment d’émotion, un lien invisible <br />
-                entre l’instinct et la conscience.<br />
+Un fragment d'émotion, un lien invisible <br />
+                entre l'instinct et la conscience.<br />
 Une tentative de donner forme à ce qui nous traverse.<br />
-
-            
          </p>
+            <div class="oeuvres-nav-cards">
+                <a href="#peintures" class="oeuvres-nav-card" style="background-image: url('images/card-peintures.webp')">
+                    <div class="oeuvres-nav-card__overlay"></div>
+                    <span class="oeuvres-nav-card__label">Peintures</span>
+                </a>
+                <a href="#sculptures" class="oeuvres-nav-card" style="background-image: url('images/card-sculptures.webp')">
+                    <div class="oeuvres-nav-card__overlay"></div>
+                    <span class="oeuvres-nav-card__label">Sculptures</span>
+                </a>
+            </div>
         </section>
 
         <!-- Bloc 3 : Peintures – Animal Totem / Hors-Série -->
         <section id="peintures" class="gallery-section">
             <div id="peintures-container"></div>
         </section>
+
+        <!-- Pont 3→4 : Respiration -->
+        <div class="section-bridge fade-in">
+            <a href="#sculptures" class="btn-bridge">Voir les sculptures</a>
+        </div>
 
         <!-- Bloc 4 : L'artiste -->
         <section id="artiste" class="artist-section section fade-in">
@@ -151,6 +167,12 @@ Une tentative de donner forme à ce qui nous traverse.<br />
             </div>
         </section>
 
+        <!-- Pont 4→5 : Respiration -->
+        <div class="section-bridge fade-in">
+            <a href="#oeuvres" class="btn-bridge btn-bridge--secondary">Retour aux œuvres</a>
+            <a href="#sculptures" class="btn-bridge">Découvrir la suite</a>
+        </div>
+
         <!-- Bloc 5 : Sculptures -->
         <section id="sculptures" class="gallery-section section fade-in">
             <div class="sculptures-intro">
@@ -163,6 +185,11 @@ Une tentative de donner forme à ce qui nous traverse.<br />
             </div>
             <div id="sculptures-container"></div>
         </section>
+
+        <!-- Pont 5→6 : Respiration -->
+        <div class="section-bridge fade-in">
+            <a href="#oeuvres" class="btn-bridge btn-bridge--secondary">Retour aux œuvres</a>
+        </div>
 
         <!-- Bloc 6 : Portrait personnalisé -->
         <section id="portraits" class="gallery-section section fade-in">
@@ -208,6 +235,9 @@ Une tentative de donner forme à ce qui nous traverse.<br />
             <p class="narrative-text"></p>
           </div>
         </div>
+
+        <!-- Bouton retour en haut -->
+        <button id="back-to-top" aria-label="Retour en haut">↑</button>
 
         <script src="script.js"></script>
     </body>

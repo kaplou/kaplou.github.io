@@ -216,6 +216,82 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* ── Burger menu ── */
+  const burger = document.querySelector(".nav-burger");
+  const navLinks = document.querySelector(".nav-links");
+  const navOverlay = document.querySelector(".nav-overlay");
+
+  function openMenu() {
+    burger.setAttribute("aria-expanded", "true");
+    burger.textContent = "✕";
+    navLinks.classList.add("is-open");
+    navOverlay.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenu() {
+    burger.setAttribute("aria-expanded", "false");
+    burger.textContent = "☰";
+    navLinks.classList.remove("is-open");
+    navOverlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  if (burger) {
+    burger.addEventListener("click", () => {
+      const isOpen = burger.getAttribute("aria-expanded") === "true";
+      isOpen ? closeMenu() : openMenu();
+    });
+  }
+
+  if (navOverlay) {
+    navOverlay.addEventListener("click", closeMenu);
+  }
+
+  navLinks.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => closeMenu());
+  });
+
+  /* ── Active nav on scroll ── */
+  const navAnchors = ["accueil", "oeuvres", "peintures", "artiste", "sculptures", "contact"];
+  const navAnchorLinks = {};
+  navAnchors.forEach(id => {
+    const el = document.querySelector(`.nav-links a[href="#${id}"]`);
+    if (el) navAnchorLinks[id] = el;
+  });
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        Object.values(navAnchorLinks).forEach(a => a.classList.remove("active"));
+        if (navAnchorLinks[id]) navAnchorLinks[id].classList.add("active");
+      }
+    });
+  }, { threshold: 0.25, rootMargin: "-60px 0px -40% 0px" });
+
+  navAnchors.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) sectionObserver.observe(el);
+  });
+
+  /* ── Back to top ── */
+  const backToTop = document.getElementById("back-to-top");
+
+  if (backToTop) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        backToTop.classList.add("is-visible");
+      } else {
+        backToTop.classList.remove("is-visible");
+      }
+    }, { passive: true });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
   /* ── Narrative overlay ── */
   const overlay = document.getElementById("narrative-overlay");
   const overlayBg = overlay.querySelector(".narrative-bg");
