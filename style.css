@@ -483,6 +483,7 @@ h1, h2, h3, .serif {
     font-weight: 600;
     color: var(--color-text);
     line-height: 1.55;
+    text-align: center;
     text-shadow: 1px 2px 5px rgba(0,0,0,0.08);
     border: none;
     padding: 0;
