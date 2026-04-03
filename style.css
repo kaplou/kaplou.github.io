@@ -246,14 +246,24 @@ h1, h2, h3, .serif {
 }
 
 .hero-content {
+    position: relative;
+    z-index: 2;
+
     max-width: 800px;
-    margin-top: var(--spacing-lg);
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 }
 
 .hero-title {
     font-size: 3.5rem;
     margin-bottom: var(--spacing-md);
-    color: var(--color-text);
+    color: #fff;
+    text-shadow: 2px 4px 12px rgba(0,0,0,0.4);
 }
 
 /* Citation manuscrite hero */
@@ -265,7 +275,9 @@ h1, h2, h3, .serif {
     line-height: 1.5;
     text-shadow: 1px 2px 6px rgba(0,0,0,0.10);
     margin-top: var(--spacing-md);
-    display: inline-block;
+    max-width: 600px;
+    text-align: center;
+
 }
 
 /* =====================
