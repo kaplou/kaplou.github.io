@@ -129,7 +129,7 @@ function buildGalleryBlock(series, isPortrait) {
     }
 
     const narrativeBtn = (!isPortrait && item.story) ? `
-      <button class="btn-narrative" data-story="${item.story.replace(/"/g, '&quot;')}" data-image="${item.image}" aria-label="Entrer dans l'œuvre">Entrer</button>
+      <button class="btn-narrative" data-story="${item.story.replace(/"/g, '&quot;')}" data-image="${item.image}" aria-label="Entrer dans l'œuvre">entrer</button>
     ` : "";
 
     const footerHTML = !isPortrait ? `
