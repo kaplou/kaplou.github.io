@@ -218,12 +218,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ── Burger menu ── */
   const burger = document.querySelector(".nav-burger");
+  const navClose = document.querySelector(".nav-close");
   const navLinks = document.querySelector(".nav-links");
   const navOverlay = document.querySelector(".nav-overlay");
 
   function openMenu() {
     burger.setAttribute("aria-expanded", "true");
-    burger.textContent = "✕";
     navLinks.classList.add("is-open");
     navOverlay.classList.add("is-open");
     document.body.style.overflow = "hidden";
@@ -231,7 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function closeMenu() {
     burger.setAttribute("aria-expanded", "false");
-    burger.textContent = "☰";
     navLinks.classList.remove("is-open");
     navOverlay.classList.remove("is-open");
     document.body.style.overflow = "";
@@ -242,6 +241,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const isOpen = burger.getAttribute("aria-expanded") === "true";
       isOpen ? closeMenu() : openMenu();
     });
+  }
+
+  if (navClose) {
+    navClose.addEventListener("click", closeMenu);
   }
 
   if (navOverlay) {

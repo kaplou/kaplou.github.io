@@ -1,5 +1,7 @@
 
-/* Variables & Resets */
+/* ============================================================
+   Variables & Resets
+   ============================================================ */
 :root {
     --color-bg: #f9f8f6;
     --color-text: #2c2c2c;
@@ -42,7 +44,7 @@ body::before {
     left: 10%;
     width: 40vw;
     height: 100vh;
-    background-image: 
+    background-image:
         radial-gradient(at 20% 20%, rgba(212, 154, 122, 0.07) 0%, transparent 50%),
         radial-gradient(at 80% 40%, rgba(212, 154, 122, 0.05) 0%, transparent 40%),
         radial-gradient(at 40% 70%, rgba(212, 154, 122, 0.08) 0%, transparent 50%),
@@ -59,13 +61,13 @@ body::after {
     left: 15%;
     width: 25vw;
     height: 120%;
-    background: linear-gradient(165deg, 
-        transparent 0%, 
-        rgba(212, 154, 122, 0.02) 10%, 
-        rgba(212, 154, 122, 0.08) 25%, 
-        rgba(212, 154, 122, 0.03) 45%, 
-        rgba(212, 154, 122, 0.09) 65%, 
-        rgba(212, 154, 122, 0.02) 85%, 
+    background: linear-gradient(165deg,
+        transparent 0%,
+        rgba(212, 154, 122, 0.02) 10%,
+        rgba(212, 154, 122, 0.08) 25%,
+        rgba(212, 154, 122, 0.03) 45%,
+        rgba(212, 154, 122, 0.09) 65%,
+        rgba(212, 154, 122, 0.02) 85%,
         transparent 100%
     );
     mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 Q 150 250 50 500 T 150 1000' fill='none' stroke='black' stroke-width='80' opacity='0.5'/%3E%3C/svg%3E");
@@ -78,13 +80,17 @@ body::after {
     opacity: 0.6;
 }
 
-/* Typography */
+/* ============================================================
+   Typography
+   ============================================================ */
 h1, h2, h3, .serif {
     font-family: var(--font-title);
     font-weight: 400;
 }
 
-/* Animations */
+/* ============================================================
+   Animations
+   ============================================================ */
 .fade-in {
     opacity: 0;
     transform: translateY(20px);
@@ -96,14 +102,16 @@ h1, h2, h3, .serif {
     transform: translateY(0);
 }
 
-/* Header & Nav */
+/* ============================================================
+   Header & Nav
+   ============================================================ */
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     padding: var(--spacing-sm) var(--spacing-md);
-    background-color: rgba(249, 248, 246, 0.9);
+    background-color: rgba(249, 248, 246, 0.92);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
@@ -115,12 +123,15 @@ h1, h2, h3, .serif {
     margin: 0 auto;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
+/* ── Nav links (desktop) ── */
 .nav-links {
     display: flex;
     list-style: none;
     gap: var(--spacing-md);
+    align-items: center;
 }
 
 .nav-links a {
@@ -149,37 +160,68 @@ h1, h2, h3, .serif {
     opacity: 0.7;
 }
 
-/* Burger button – hidden on desktop */
+/* ── Close item inside nav (desktop: hidden) ── */
+.nav-close-item {
+    display: none;
+}
+
+/* ── Burger button – hidden on desktop ── */
 .nav-burger {
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.4rem;
-    color: var(--color-text);
-    padding: 0.25rem 0.5rem;
+    width: 38px;
+    height: 38px;
+    padding: 6px;
     z-index: 1100;
     position: relative;
-    line-height: 1;
-    transition: color 0.3s ease;
 }
 
-.nav-burger:hover {
-    color: var(--color-accent-orange);
+.burger-bar {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background-color: var(--color-text);
+    border-radius: 2px;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.25s ease,
+                width 0.3s ease;
+    transform-origin: center;
 }
 
-/* Full-screen overlay for mobile nav */
+.nav-burger:hover .burger-bar {
+    background-color: var(--color-accent-orange);
+}
+
+/* X state when menu is open */
+.nav-burger[aria-expanded="true"] .burger-bar:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+.nav-burger[aria-expanded="true"] .burger-bar:nth-child(2) {
+    opacity: 0;
+    width: 0;
+}
+.nav-burger[aria-expanded="true"] .burger-bar:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ── Full-screen overlay for mobile nav ── */
 .nav-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(249, 248, 246, 0.97);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(44, 44, 44, 0.35);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     z-index: 1050;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.35s ease;
 }
 
 .nav-overlay.is-open {
@@ -187,7 +229,53 @@ h1, h2, h3, .serif {
     pointer-events: all;
 }
 
-/* Sections */
+/* ── Nav close button (X inside the panel) ── */
+.nav-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: 1px solid rgba(44, 44, 44, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.nav-close::before,
+.nav-close::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 1px;
+    background-color: var(--color-text);
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-close::before {
+    transform: rotate(45deg);
+}
+
+.nav-close::after {
+    transform: rotate(-45deg);
+}
+
+.nav-close:hover {
+    border-color: var(--color-accent-orange);
+    background: rgba(212, 154, 122, 0.06);
+}
+
+.nav-close:hover::before,
+.nav-close:hover::after {
+    background-color: var(--color-accent-orange);
+}
+
+/* ============================================================
+   Sections
+   ============================================================ */
 .section {
     padding: var(--spacing-xl) var(--spacing-md);
     max-width: 1200px;
@@ -201,105 +289,64 @@ h1, h2, h3, .serif {
     color: var(--color-text);
 }
 
-/* =====================
+/* ============================================================
    Bloc 1 : Hero
-   ===================== */
-
+   ============================================================ */
 .hero {
     position: relative;
     height: 100vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-
     padding: 0 var(--spacing-md);
-
-    background-image:("images/cover.jpg);
+    background-image: url("images/cover.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-/* voile sombre pour lisibilité */
 .hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.18);
     z-index: 1;
 }
 
-/* contenu centré */
 .hero-content {
     position: relative;
     z-index: 2;
-
     height: 100%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     max-width: 800px;
     margin: 0 auto;
 }
 
-/* titre */
 .hero-title {
     font-size: 3.5rem;
     margin-bottom: var(--spacing-md);
     color: #fff;
-    text-shadow: 2px 4px 12px rgba(0,0,0,0.4);
+    text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* citation */
 .hero-citation {
     max-width: 600px;
     text-align: center;
     font-family: var(--font-handwritten);
     font-size: 1.65rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--color-text);
     line-height: 1.5;
-    text-shadow: 1px 2px 6px rgba(0,0,0,0.2);
     margin-top: var(--spacing-md);
 }
 
-/* responsive */
-@media (max-width: 768px) {
-    .hero {
-        height: 100vh;
-        padding-top: 5rem;
-    }
-
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .hero-citation {
-        font-size: 1.2rem;
-    }
-}
-
-/* Citation manuscrite hero */
-.hero-citation {
-    max-width: 600px;
-    text-align: center;
-    font-family: var(--font-handwritten);
-    font-size: 1.65rem;
-    font-weight: 600;
-    color: #fff;
-    line-height: 1.5;
-    text-shadow: 1px 2px 6px rgba(0,0,0,0.10);
-    margin-top: var(--spacing-md);
-}
-
-/* =====================
+/* ============================================================
    Bloc 2 : Intro œuvres
-   ===================== */
+   ============================================================ */
 .bloc-intro {
     text-align: center;
     padding-top: var(--spacing-xl);
@@ -316,9 +363,9 @@ h1, h2, h3, .serif {
     margin: 0 auto;
 }
 
-/* =====================
+/* ============================================================
    Gallery / Peintures / Sculptures
-   ===================== */
+   ============================================================ */
 .gallery-section {
     padding: var(--spacing-lg) var(--spacing-md);
     max-width: 1200px;
@@ -332,7 +379,7 @@ h1, h2, h3, .serif {
 .gallery-block h2 {
     font-size: 2rem;
     margin-bottom: var(--spacing-sm);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     padding-bottom: var(--spacing-sm);
 }
 
@@ -370,7 +417,7 @@ h1, h2, h3, .serif {
     overflow: hidden;
     margin-bottom: var(--spacing-sm);
     background-color: #fff;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
 }
 
 .oeuvre-image {
@@ -473,9 +520,9 @@ h1, h2, h3, .serif {
     opacity: 1;
 }
 
-/* =====================
+/* ============================================================
    Bloc 4 : L'artiste
-   ===================== */
+   ============================================================ */
 .artist-section {
 }
 
@@ -484,13 +531,12 @@ h1, h2, h3, .serif {
     margin: 0 auto;
 }
 
-/* Photo flottante */
 .artist-photo-frame {
     float: right;
     margin: 0 0 var(--spacing-md) var(--spacing-lg);
     width: 280px;
     flex-shrink: 0;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 .artist-photo {
@@ -511,7 +557,6 @@ h1, h2, h3, .serif {
     line-height: 1.8;
 }
 
-/* Citation manuscrite artiste */
 .artist-citation {
     font-family: var(--font-handwritten);
     font-size: 1.5rem;
@@ -519,7 +564,7 @@ h1, h2, h3, .serif {
     color: var(--color-text);
     line-height: 1.55;
     text-align: center;
-    text-shadow: 1px 2px 5px rgba(0,0,0,0.08);
+    text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.08);
     border: none;
     padding: 0;
     margin: var(--spacing-lg) 0;
@@ -537,7 +582,6 @@ h1, h2, h3, .serif {
     clear: both;
 }
 
-/* Signature Kaplou */
 .artist-signature-img {
     display: block;
     width: 200px;
@@ -553,9 +597,9 @@ h1, h2, h3, .serif {
     clear: both;
 }
 
-/* =====================
+/* ============================================================
    Bloc 5 : Sculptures intro
-   ===================== */
+   ============================================================ */
 .sculptures-intro {
     text-align: center;
     max-width: 680px;
@@ -570,17 +614,17 @@ h1, h2, h3, .serif {
     line-height: 2;
 }
 
-/* =====================
+/* ============================================================
    Bloc 6 : Portraits intro
-   ===================== */
+   ============================================================ */
 .portraits-intro {
     margin-bottom: var(--spacing-lg);
     text-align: center;
 }
 
-/* =====================
+/* ============================================================
    Bloc 7 : Contact
-   ===================== */
+   ============================================================ */
 .contact-content {
     max-width: 600px;
     margin: 0 auto;
@@ -597,7 +641,9 @@ h1, h2, h3, .serif {
     color: var(--color-text-light);
 }
 
-/* Buttons */
+/* ============================================================
+   Buttons
+   ============================================================ */
 .btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
@@ -633,7 +679,9 @@ h1, h2, h3, .serif {
     color: #fff;
 }
 
-/* Footer */
+/* ============================================================
+   Footer
+   ============================================================ */
 .footer {
     text-align: center;
     padding: var(--spacing-md);
@@ -642,9 +690,9 @@ h1, h2, h3, .serif {
     color: var(--color-text-light);
 }
 
-/* =====================
-   Œuvres navigation buttons (texture)
-   ===================== */
+/* ============================================================
+   Œuvres navigation cards
+   ============================================================ */
 .oeuvres-nav-cards {
     display: flex;
     gap: var(--spacing-sm);
@@ -689,9 +737,9 @@ h1, h2, h3, .serif {
     color: #fff;
 }
 
-/* =====================
+/* ============================================================
    Section breathing bridges
-   ===================== */
+   ============================================================ */
 .section-bridge {
     text-align: center;
     padding: var(--spacing-md) var(--spacing-md);
@@ -730,9 +778,9 @@ h1, h2, h3, .serif {
     opacity: 1;
 }
 
-/* =====================
+/* ============================================================
    Back to top button
-   ===================== */
+   ============================================================ */
 #back-to-top {
     position: fixed;
     bottom: 2rem;
@@ -766,119 +814,155 @@ h1, h2, h3, .serif {
     border-color: var(--color-accent-orange);
 }
 
-/* =====================
-   Responsive
-   ===================== */
+/* ============================================================
+   Responsive – Tablette
+   ============================================================ */
 @media (max-width: 1024px) {
     .oeuvre-card {
         flex: 1 1 calc(50% - var(--spacing-lg));
     }
 }
 
+/* ============================================================
+   Responsive – Mobile (≤ 768px)
+   ============================================================ */
 @media (max-width: 768px) {
-    .hero {
-        height: 100vh;
-        padding-top: 5rem;
-    }
-    /* Show burger, hide inline nav */
-    .nav-burger {
-        display: block;
+
+    /* Header */
+    .header {
+        padding: 0.6rem var(--spacing-sm);
     }
 
+    /* Nav */
     .nav {
         justify-content: flex-end;
     }
 
+    /* Show burger */
+    .nav-burger {
+        display: flex;
+    }
+
+    /* Show overlay */
     .nav-overlay {
         display: block;
     }
 
+    /* Nav links: slide-in panel */
     .nav-links {
         position: fixed;
         top: 0;
         right: 0;
-        width: 80%;
-        height: 100vh;
-
-        background: rgba(255, 255, 255, 0.96);
-        backdrop-filter: blur(10px);
-
-        display: flex;
+        width: min(80vw, 320px);
+        height: 100dvh;
+        background: rgba(249, 248, 246, 0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         flex-direction: column;
         align-items: center;
         justify-content: center;
-
-        padding: 20px;
+        gap: 0;
+        padding: 2rem 1.5rem 3rem;
         z-index: 1100;
-
         transform: translateX(100%);
-        transition: transform 0.3s ease;
-        text-align: center;
+        transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -4px 0 40px rgba(0, 0, 0, 0.08);
     }
 
     .nav-links.is-open {
         transform: translateX(0);
     }
-    .nav-links a {
-        display: block;
-        padding: 12px 0;
-        white-space: normal;
-    }
-    .nav-links.is-open {
+
+    /* Close item visible on mobile */
+    .nav-close-item {
         display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    /* Nav links items */
+    .nav-links li:not(.nav-close-item) {
+        width: 100%;
+        text-align: center;
     }
 
     .nav-links a {
-        font-size: 1.2rem;
-        letter-spacing: 0.1em;
+        display: block;
+        padding: 0.85rem 0;
+        font-size: 1.1rem;
+        letter-spacing: 0.12em;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateX(12px);
         transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    }
+
+    .nav-links li:last-child a {
+        border-bottom: none;
     }
 
     .nav-links.is-open a {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
 
-    .nav-links.is-open li:nth-child(1) a { transition-delay: 0.05s; }
-    .nav-links.is-open li:nth-child(2) a { transition-delay: 0.1s; }
-    .nav-links.is-open li:nth-child(3) a { transition-delay: 0.15s; }
-    .nav-links.is-open li:nth-child(4) a { transition-delay: 0.2s; }
-    .nav-links.is-open li:nth-child(5) a { transition-delay: 0.25s; }
-    .nav-links.is-open li:nth-child(6) a { transition-delay: 0.3s; }
+    .nav-links.is-open li:nth-child(2) a { transition-delay: 0.06s; }
+    .nav-links.is-open li:nth-child(3) a { transition-delay: 0.11s; }
+    .nav-links.is-open li:nth-child(4) a { transition-delay: 0.16s; }
+    .nav-links.is-open li:nth-child(5) a { transition-delay: 0.21s; }
+    .nav-links.is-open li:nth-child(6) a { transition-delay: 0.26s; }
+    .nav-links.is-open li:nth-child(7) a { transition-delay: 0.31s; }
+
+    /* Hero */
+    .hero {
+        height: 100svh;
+        padding-top: 4rem;
+        background-attachment: scroll;
+    }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     .hero-citation {
-        font-size: 1.35rem;
+        font-size: 1.25rem;
     }
 
+    /* Sections */
     .section-title {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
 
+    .section {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+
+    /* Gallery cards: full width */
     .oeuvre-card {
         flex: 1 1 100%;
         max-width: none;
     }
 
+    /* Artist */
     .artist-photo-frame {
         float: none;
         width: 100%;
-        max-width: 320px;
+        max-width: 300px;
         margin: 0 auto var(--spacing-md);
         display: block;
     }
 
     .artist-citation {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
     }
 
     .artist-citation--alone {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
+    }
+
+    .gallery-block h2 {
+        font-size: 1.65rem;
     }
 
     .series-intro,
@@ -886,38 +970,13 @@ h1, h2, h3, .serif {
     .bloc-intro-text {
         font-size: 0.95rem;
         line-height: 1.7;
-        padding: 0 var(--spacing-sm);
-    }
-
-    .gallery-block h2 {
-        font-size: 1.8rem;
-    }
-
-
-    .header {
-        padding: 0.5rem;
-    }
-
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .hero-citation {
-        font-size: 1.2rem;
-    }
-
-    .gallery-block h2 {
-        font-size: 1.5rem;
-    }
-
-    .artist-citation {
-        font-size: 1.15rem;
+        padding: 0 var(--spacing-xs);
     }
 }
 
-/* =====================
+/* ============================================================
    Poetic Quote – Fragment de papier
-   ===================== */
+   ============================================================ */
 .poetic-quote {
     position: relative;
     background-color: rgba(159, 179, 153, 0.14);
@@ -940,59 +999,52 @@ h1, h2, h3, .serif {
     border-radius: inherit;
     background: linear-gradient(
         135deg,
-        rgba(255, 255, 255, 0.35) 0%,
-        transparent 55%
+        rgba(255, 255, 255, 0.4) 0%,
+        transparent 40%,
+        rgba(159, 179, 153, 0.08) 80%,
+        transparent 100%
     );
     pointer-events: none;
 }
 
 .poetic-quote.pq-visible {
     opacity: 1;
-    transform: rotate(-0.4deg);
+    transform: translateY(0) rotate(-0.4deg);
 }
 
-@media (max-width: 768px) {
-    .poetic-quote {
-        padding: 1rem 1.2rem;
-    }
-}
 
-/* ─────────────────────────────────────────────
-   Narrative overlay feature
-   ───────────────────────────────────────────── */
-
-/* Discreet secondary button under each artwork */
+/* ============================================================
+   Btn Narrative
+   ============================================================ */
 .btn-narrative {
     display: inline-block;
-    margin-top: 0.5rem;
-    padding: 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: var(--font-handwritten);
-    font-size: 0.95rem;
+    margin-top: var(--spacing-xs);
+    padding: 0.55rem 1.2rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: 2px;
+    background: transparent;
     color: var(--color-text-light);
-    letter-spacing: 0.04em;
-    opacity: 0.6;
-    transition: opacity 0.3s ease, color 0.3s ease;
-    text-decoration: none;
-}
-
-.btn-narrative::before {
-    content: "— ";
-    opacity: 0.5;
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    font-family: var(--font-text);
 }
 
 .btn-narrative:hover {
-    opacity: 1;
     color: var(--color-text);
+    border-color: var(--color-accent-orange);
+    background: rgba(212, 154, 122, 0.06);
 }
 
-/* Fullscreen overlay – hidden by default */
+/* ============================================================
+   Narrative Overlay
+   ============================================================ */
 #narrative-overlay {
     position: fixed;
     inset: 0;
-    z-index: 1000;
+    z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1006,7 +1058,6 @@ h1, h2, h3, .serif {
     pointer-events: all;
 }
 
-/* Artwork image fills the background */
 .narrative-bg {
     position: absolute;
     inset: 0;
@@ -1021,14 +1072,12 @@ h1, h2, h3, .serif {
     transform: scale(1);
 }
 
-/* Dark veil over the image */
 .narrative-veil {
     position: absolute;
     inset: 0;
     background: rgba(10, 10, 10, 0.65);
 }
 
-/* Close button */
 .narrative-close {
     position: absolute;
     top: 1.5rem;
@@ -1048,7 +1097,6 @@ h1, h2, h3, .serif {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* Centered text body */
 .narrative-body {
     position: relative;
     z-index: 2;
@@ -1057,7 +1105,6 @@ h1, h2, h3, .serif {
     text-align: center;
 }
 
-/* Story text lines */
 .narrative-text {
     display: flex;
     flex-direction: column;
