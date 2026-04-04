@@ -723,11 +723,17 @@ h1, h2, h3, .serif {
 .oeuvres-nav-card__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.38);
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.45) 0%,
+        rgba(0, 0, 0, 0.2) 40%,
+        rgba(0, 0, 0, 0.0) 75%
+    );
 }
 
 .oeuvres-nav-card__label {
     position: relative;
+   text-shadow: 0 2px 10px rgba(0,0,0,0.6);
     z-index: 1;
     font-family: var(--font-text);
     font-size: 0.9rem;
