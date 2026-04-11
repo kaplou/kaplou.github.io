@@ -604,13 +604,6 @@ h1, h2, h3, .serif {
     display: block;
 }
 
-/* Mise en valeur spécifique de la première citation (Dunkerque) */
-.artist-body blockquote:first-of-type {
-    font-size: 1.1em;
-    font-style: italic;
-    opacity: 0.95;
-}
-
 /* Citation finale */
 .artist-citation--alone {
     text-align: center;
